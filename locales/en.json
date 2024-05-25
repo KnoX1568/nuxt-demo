@@ -1,0 +1,8 @@
+{
+  "app.title": "Nuxt-Demo",
+  "navigation.menu.label": "Menu",
+  "menu.language.select.label": "Language Select",
+  "language.select.locale.en": "English",
+  "language.select.locale.de": "German",
+  "hello.world": "Hello World!"
+}

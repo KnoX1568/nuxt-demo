@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar>
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" />
-      <v-toolbar-title text="Demo" />
+      <v-toolbar-title :text="$t('app.title')" />
       <v-spacer />
       <v-btn @click="toggleTheme" :icon="(theme.global.current.value.dark) ? 'mdi-weather-sunny' : 'mdi-moon-waxing-crescent'" />
     </v-app-bar>
@@ -12,7 +12,21 @@
         :location="$vuetify.display.mobile ? 'top' : undefined"
     >
       <v-list>
-        <v-list-item title="Menu" />
+        <v-list-item :title="$t('navigation.menu.label')" />
+        <v-list-item-action>
+          <v-select
+              v-model="$i18n.locale"
+              :label="$t('menu.language.select.label')"
+              :items="$i18n.availableLocales"
+          >
+            <template v-slot:selection="{ item, props }">
+              <v-list-item v-bind="props" :title="$t(`language.select.locale.${item.value}`)" />
+            </template>
+            <template v-slot:item="{ item, props }">
+              <v-list-item v-bind="props" :title="$t(`language.select.locale.${item.value}`)" />
+            </template>
+          </v-select>
+        </v-list-item-action>
       </v-list>
     </v-navigation-drawer>
 
