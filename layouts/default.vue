@@ -32,6 +32,17 @@
 
     <v-main class="d-flex align-center justify-center" style="min-height: 300px">
       <slot />
+      <v-fab-transition>
+        <v-fab
+            v-scroll="onScroll"
+            v-show="showScrollToTopButton"
+            icon="mdi-chevron-up"
+            style="position: fixed; bottom: 50px; right: 25px"
+            color="primary"
+            absolute
+            @click="scrollToTop"
+        />
+      </v-fab-transition>
     </v-main>
   </v-app>
 </template>
@@ -46,4 +57,21 @@ const drawer = ref<boolean>(false)
 const toggleTheme = () => {
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
 }
+
+const showScrollToTopButton = ref(false)
+
+const onScroll = (event: any) => {
+  const top = window.scrollY || event.target.scrollTop || 0;
+  showScrollToTopButton.value = top > 20
+}
+
+const scrollToTop = () => {
+  window.scrollTo(0,0);
+}
 </script>
+
+<style>
+html {
+  scroll-behavior: smooth;
+}
+</style>
