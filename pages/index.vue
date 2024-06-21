@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  {{ $t('hello.world') }}
+  <div>
+    {{ $t('hello.world') }}
+  </div>
 </template>
 
 <style scoped>

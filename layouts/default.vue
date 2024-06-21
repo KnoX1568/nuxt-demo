@@ -4,7 +4,7 @@
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer" />
       <v-toolbar-title :text="$t('app.title')" />
       <v-spacer />
-      <v-btn @click="toggleTheme" :icon="(theme.global.current.value.dark) ? 'mdi-weather-sunny' : 'mdi-moon-waxing-crescent'" />
+      <v-btn :icon="(theme.global.current.value.dark) ? 'mdi-weather-sunny' : 'mdi-moon-waxing-crescent'" @click="toggleTheme" />
     </v-app-bar>
 
     <v-navigation-drawer
@@ -19,10 +19,10 @@
               :label="$t('menu.language.select.label')"
               :items="$i18n.availableLocales"
           >
-            <template v-slot:selection="{ item, props }">
+            <template #selection="{ item, props }">
               <v-list-item v-bind="props" :title="$t(`language.select.locale.${item.value}`)" />
             </template>
-            <template v-slot:item="{ item, props }">
+            <template #item="{ item, props }">
               <v-list-item v-bind="props" :title="$t(`language.select.locale.${item.value}`)" />
             </template>
           </v-select>
@@ -34,8 +34,8 @@
       <slot />
       <v-fab-transition>
         <v-fab
-            v-scroll="onScroll"
             v-show="showScrollToTopButton"
+            v-scroll="onScroll"
             icon="mdi-chevron-up"
             style="position: fixed; bottom: 50px; right: 25px"
             color="primary"
@@ -60,6 +60,7 @@ const toggleTheme = () => {
 
 const showScrollToTopButton = ref(false)
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const onScroll = (event: any) => {
   const top = window.scrollY || event.target.scrollTop || 0;
   showScrollToTopButton.value = top > 20
